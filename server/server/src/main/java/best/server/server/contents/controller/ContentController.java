@@ -20,9 +20,7 @@ public class ContentController {
 
     @Transactional
     @PostMapping("/")
-    public void saveContent(@RequestParam("text") String text){
-        Content content = new Content();
-        content.setText(text);
+    public void saveContent(@RequestBody Content content) {
         contentService.save(content);
     }
 
