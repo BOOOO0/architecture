@@ -2,31 +2,26 @@ package best.server.server.contents.controller;
 
 import best.server.server.contents.domain.Content;
 import best.server.server.contents.service.ContentService;
-import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import lombok.AllArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping(path = "/")
+@AllArgsConstructor
 public class ContentController {
     private final ContentService contentService;
 
-    @Autowired
-    public ContentController(ContentService contentService) {
-        this.contentService = contentService;
-    }
-
+    @PostMapping
     @Transactional
-    @PostMapping("/")
     public void saveContent(@RequestBody Content content) {
         contentService.save(content);
     }
 
-    @GetMapping("check")
-    @ResponseBody
-    public List<Content> checkContent(){
-        return contentService.findAll();
+    @GetMapping
+    public List<Content> getContent(){
+            return contentService.findAll();
     }
 }
