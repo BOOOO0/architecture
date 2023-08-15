@@ -1,10 +1,16 @@
 pipeline{
     agent any
     stages{
+        stage("Checkout Repo") {
+            steps {
+                cleanWs()
+                checkout([$class: 'GitSCM', branches: [[name: 'deploy/server']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/BOOOO0/architecture.git']]])
+            }
+        }
         stage("Build"){
             steps{
                 script{
-                    sh './server/gradlew build'
+                    sh './gradlew build'
                 }
             }
             post{
