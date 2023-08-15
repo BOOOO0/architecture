@@ -1,19 +1,16 @@
 import React, { useState, useEffect} from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import DataList from './DataList'
 
 const GetData = () => {
-    const asd = "asd";
     let [data, setData] = useState([]);
     const navigate = useNavigate();
-
     useEffect(() => {
       getData();
     }, []);
 
     const getData = async () => {
-      await axios.get("http://localhost:8080/").then((response)=>{
+      await axios.get("http://localhost:5173/content").then((response)=>{
         setData(response.data);
       })
     };
