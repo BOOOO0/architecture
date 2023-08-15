@@ -20,7 +20,7 @@ public class ContentController {
         contentService.save(content);
     }
 
-    @GetMapping
+    @GetMapping("/content")
     public List<Content> getContent(){
             return contentService.findAll();
     }
