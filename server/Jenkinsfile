@@ -11,6 +11,7 @@ pipeline{
             steps{
                 script{
                     sh 'cd ./server/server'
+                    sh 'pwd'
                     sh 'chmod 777 gradlew'
                     sh './gradlew build'
                 }
