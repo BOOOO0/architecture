@@ -11,6 +11,7 @@ pipeline{
             steps{
                 script{
                     sh 'chmod 777 ./server/server/gradlew'
+                    sh './server/server/gradlew init'
                     sh './server/server/gradlew build'
                 }
             }
