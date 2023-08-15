@@ -1,10 +1,11 @@
 - name: "Deploy Frontend Artifact"
+  gather_facts: false
   hosts: all
   become: true
   tasks:
     - name: "Download Artifact"
       shell:
-        cmd: "/usr/local/bin/aws --endpoint-url=https://kr.object.ncloudstorage.com s3 cp s3://itwassummer0815/{{ filename }} /usr/share/nginx/build.tar.gz"
+        cmd: "/usr/local/bin/aws --endpoint-url=https://kr.object.ncloudstorage.com s3 cp s3://itwassummer0815/{{ file_name }} /usr/share/nginx/build.tar.gz"
     - name: "Wait for Artifact"
       wait_for:
         path: /usr/share/nginx/build.tar.gz
