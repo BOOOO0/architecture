@@ -10,6 +10,7 @@ pipeline{
         stage("Build"){
             steps{
                 script{
+                    sh 'chmod 777 ./server/server/gradlew'
                     sh './server/server/gradlew build'
                 }
             }
@@ -22,7 +23,7 @@ pipeline{
         stage("Deploy"){
             steps{
                 sh '''
-ansible-playbook -i ./ansible/back_inventory.ini ./ansible/backend_playbook.yml --extra-vars "file_name='${JOB_NAME}${BUILD_NUMBER}.jar'"
+ansible-playbook -i ./server/ansible/back_inventory.ini ./server/ansible/backend_playbook.yml --extra-vars "file_name='${JOB_NAME}${BUILD_NUMBER}.jar'"
                    '''
             }
         }
