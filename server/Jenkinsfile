@@ -10,9 +10,9 @@ pipeline{
         stage("Build"){
             steps{
                 script{
-                    sh 'chmod 777 ./server/server/gradlew'
-                    sh './server/server/gradlew init'
-                    sh './server/server/gradlew build'
+                    sh 'cd ./server/server'
+                    sh 'chmod 777 gradlew'
+                    sh './gradlew build'
                 }
             }
             post{
