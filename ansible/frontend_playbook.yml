@@ -17,5 +17,5 @@
     - name: "Move Artifact and Remove Unneccessary Files"
       shell: |
         rm -rf /usr/share/nginx/html
-        mv /usr/share/nginx/build /usr/share/nginx/html
+        mv /usr/share/nginx/dist /usr/share/nginx/html
         rm /usr/share/nginx/build.tar.gz
