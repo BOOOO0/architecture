@@ -23,9 +23,9 @@ pipeline{
         }
         stage("Deploy"){
             steps{
-                sh '''
+                sh '
 ansible-playbook -i ./ansible/front_inventory.ini ./ansible/frontend_playbook.yml --extra-vars "file_name='${JOB_NAME}${BUILD_NUMBER}.tar.gz'"
-                   '''
+                   '
             }
         }
     }
