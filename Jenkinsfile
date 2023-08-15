@@ -12,7 +12,7 @@ pipeline{
                 nodejs('node16'){
                     sh 'npm install'
                     sh 'npm run build'
-                    sh 'tar -zcf ${JOB_NAME}${BUILD_NUMBER}.tar.gz ./build/*'
+                    sh 'tar -zcf ${JOB_NAME}${BUILD_NUMBER}.tar.gz ./dist/*'
                 }
             }
             post{
