@@ -10,6 +10,7 @@ pipeline{
         stage("Build"){
             steps{
                 script{
+                    sh 'chmod 777 gradlew'
                     sh './gradlew build'
                 }
             }
