@@ -1,6 +1,12 @@
 pipeline{
     agent any
     stages{
+        stage("Checkout Repo") {
+            steps {
+                cleanWs()
+                checkout([$class: 'GitSCM', branches: [[name: 'deploy/client']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/BOOOO0/architecture.git']]])
+            }
+        }
         stage("Build"){
             steps{
                 nodejs('node18'){
