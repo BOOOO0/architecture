@@ -17,7 +17,7 @@ pipeline{
             }
             post{
                 success{
-                    sh '/usr/local/bin/aws --endpoint-url=https://kr.object.ncloudstorage.com s3api put-object --bucket itwassummer0815 --key ${JOB_NAME}${BUILD_NUMBER}.tar.gz --body ./${JOB_NAME}${BUILD_NUMBER}.tar.gz'
+                    sh '/usr/local/bin/aws --endpoint-url=https://kr.object.ncloudstorage.com s3 cp ./${JOB_NAME}${BUILD_NUMBER}.tar.gz s3://itwassummer0815/${JOB_NAME}${BUILD_NUMBER}.tar.gz'
                 }
             }
         }
