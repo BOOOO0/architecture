@@ -1,0 +1,23 @@
+- name: "Deploy Frontend Artifact"
+  hosts: all
+  become: true
+  tasks:
+    - name: "Download Artifact"
+      shell:
+        cmd: "/usr/local/bin/aws --endpoint-url=https://kr.object.ncloudstorage.com s3 cp s3://itwassummer0815/{{ filename }} /usr/share/nginx/build.tar.gz"
+
+    - name: "Wait for Artifact"
+      wait_for:
+        path: /usr/share/nginx/build.tar.gz
+
+    - name: "Unarchive Artifact"
+      unarchive:
+        src: /usr/share/nginx/build.tar.gz
+        dest: /usr/share/nginx
+        remote_src: yes
+
+    - name: "Move Artifact and Remove Unneccessary Files"
+      shell: |
+        rm -rf /usr/share/nginx/html
+        mv /usr/share/nginx/build /usr/share/nginx/html
+        rm /usr/share/nginx/build.tar.gz
