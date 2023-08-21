@@ -10,7 +10,7 @@ const GetData = () => {
     }, []);
 
     const getData = async () => {
-      await axios.get("http://10.0.0.6:5173/content").then((response)=>{
+      await axios.get("http://localhost:5173/content").then((response)=>{
         setData(response.data);
       })
     };
