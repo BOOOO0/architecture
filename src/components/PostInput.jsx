@@ -16,7 +16,7 @@ const PostInput = () => {
       console.log(myText);
       axios({
         method: "POST",
-        url: "http://localhost:5173/",
+        url: "http://10.0.0.6:5173/",
         headers: {
           "Content-Type": "application/json",
         },
