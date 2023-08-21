@@ -16,7 +16,7 @@ pipeline{
             }
             post{
                 success{
-                    sh '/usr/local/bin/aws --endpoint-url=https://kr.object.ncloudstorage.com s3 cp ./server/build/libs/server-0.0.1-SNAPSHOT.jar s3://itwassummer0815/${JOB_NAME}${BUILD_NUMBER}.jar'
+                    sh '/usr/local/bin/aws --endpoint-url=https://kr.object.ncloudstorage.com s3 cp ./build/libs/server-0.0.1-SNAPSHOT.jar s3://itwassummer0815/${JOB_NAME}${BUILD_NUMBER}.jar'
                 }
             }
         }
