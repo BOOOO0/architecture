@@ -8,5 +8,5 @@
 
     - name: "Deploy"
       shell:
-        cmd: './root/pid/replaceserver.sh'
+        cmd: 'sh /root/pid/replaceserver.sh'
 
