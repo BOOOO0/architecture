@@ -6,7 +6,10 @@
       shell:
         cmd: '/usr/local/bin/aws --endpoint-url=https://kr.object.ncloudstorage.com s3 cp s3://itwassummer0815/{{ file_name }} /root/artifact/server.jar'
 
-    - name: "Deploy"
+    - name: "Kill Older Server"
       shell:
         cmd: 'sh /root/pid/replaceserver.sh'
 
+    - name: "Deploy"
+      shell:
+        cmd: 'nohup java -jar /root/artifact/server.jar &'
