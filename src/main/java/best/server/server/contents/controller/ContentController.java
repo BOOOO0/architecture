@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/")
-@CrossOrigin("http://10.0.0.6:5173/")
+@CrossOrigin("http://10.0.0.6:80/")
 @AllArgsConstructor
 public class ContentController {
     private final ContentService contentService;
