@@ -9,13 +9,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "/")
-@CrossOrigin("http://10.0.0.6:80/")
+@RequestMapping(path = "/api")
 @AllArgsConstructor
 public class ContentController {
     private final ContentService contentService;
 
-    @PostMapping
+    @PostMapping("/")
     @Transactional
     public void saveContent(@RequestBody Content content) {
         contentService.save(content);
