@@ -7,12 +7,12 @@ pipeline{
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/BOOOO0/architecture.git']]])
             }
         }
-        stage("Build"){
+         stage("Build"){
             steps{
-                nodejs('node18'){
+                nodejs('node16'){
                     sh 'npm install'
                     sh 'npm run build'
-                    sh 'tar -zcf ${JOB_NAME}${BUILD_NUMBER}.tar.gz ./client/build/*'
+                    sh 'tar -zcf ${JOB_NAME}${BUILD_NUMBER}.tar.gz ./dist/*'
                 }
             }
             post{
@@ -24,8 +24,8 @@ pipeline{
         stage("Deploy"){
             steps{
                 sh '''
-ansible-playbook -i ./client/ansible/front_inventory.ini ./client/ansible/frontend_playbook.yml --extra-vars "file_name='${JOB_NAME}${BUILD_NUMBER}.tar.gz'"
-                   '''
+                    ansible-playbook -i ./ansible/front_inventory.ini ./ansible/frontend_playbook.yml --extra-vars "file_name='${JOB_NAME}${BUILD_NUMBER}.tar.gz'"
+                '''
             }
         }
     }
