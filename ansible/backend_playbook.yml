@@ -4,8 +4,13 @@
   tasks:
     - name: "Download Artifact"
       shell:
-        cmd: '/usr/local/bin/aws --endpoint-url=https://kr.object.ncloudstorage.com s3 cp s3://itwassummer0815/{{ file_name }} /root/artifact/server.jar'
-
+        cmd: "/usr/local/bin/aws --endpoint-url=https://kr.object.ncloudstorage.com s3 cp s3://itwassummer0815/{{ file_name }} /root/artifact/{{ file_name }}.jar"
+    - name: "Wait for Artifact"
+      wait_for:
+        path: /root/artifact/{{ file_name }}.jar
+    - name: "Refactor jar name"
+      shell:
+        cmd: "mv /root/artifact/{{ file_name }}.jar /root/artifact/server.jar"
     - name: "Deploy"
       shell:
-        cmd: 'sh /root/pid/replaceserver.sh'
+        cmd: "sh /root/pid/replaceserver.sh"
