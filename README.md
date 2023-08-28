@@ -130,6 +130,26 @@
 
 - CentOS 7.3에서 `ca-certificates`가 원인인 듯한 젠킨스 레포 등록 에러가 있었는데 CentOS 7.8에서는 에러가 나지 않는 것으로 보아 리눅스 디스트로 버전에 따른 차이가 있는 듯 하다. 그리고 CentOS 7.x에 대한 Jenkins의 지원이 곧 끝나기 때문에 이제는 CentOS 8.x 버전으로 서버를 생성하는 것이 좋을 것 같다.
 
+#### Slack Notification
+
+- Jenkins 파이프라인이 동작할 때 Slack에 메세지를 보냅니다.
+
+- Slack Apps에서 `Jenkins CI` 플러그인을 설치하고 Jenkins에서 Slack Notification 플러그인을 설치합니다.
+
+- Slack에서 발급된 토큰으로 Jenkins Credential을 Github 토큰과 마찬가지로 등록합니다. 이 때 Credential의 종류는 Secret Text입니다.
+
+- Jenkins 관리 -> 설정에서 Slack 항목에 Slack 워크스페이스의 서브 도메인과 토큰을 사용해 연결합니다.
+
+- ![image](./img/slacknotify.PNG)
+
+- ![image](./img/slacknotify2.PNG)
+
+- 위와 같이 연결 테스트를 통해 연결을 확인할 수 있습니다.
+
+- 마지막으로 Jenkinsfile에 각 배포 자동화 단계별로 slackSend 항목에 메세지를 보낼 채널, 메세지를 정의합니다.
+
+- ![image](./img/slacknotify3.PNG)
+
 # 되돌아보며
 
 <details><summary>Architecture</summary>
