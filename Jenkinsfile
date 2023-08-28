@@ -50,7 +50,7 @@ pipeline{
             slackSend (
                 channel: '#devops',
                 color: '#FFFF00',
-                message: "FAIL: Job ${JOB_NAME}''${BUILD_NUMBER}"
+                message: "FAIL: Job ${JOB_NAME}${BUILD_NUMBER}"
             )
         }
     }
