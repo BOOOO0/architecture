@@ -21,7 +21,7 @@ pipeline{
                 nodejs('node16'){
                     sh 'npm install --prefix ./client'
                     sh 'npm run build --prefix ./client'
-                    sh 'tar -zcf ${JOB_NAME}${BUILD_NUMBER}.tar.gz .client/dist/*'
+                    sh 'tar -zcf ${JOB_NAME}${BUILD_NUMBER}.tar.gz ./client/dist/*'
                 }
             }
             post{
