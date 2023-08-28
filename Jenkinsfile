@@ -37,21 +37,21 @@ pipeline{
                 '''
             }
         }
-        post {
-            success {
-                slackSend (
-                    channel: "#devops",
-                    color: '#FFFF00',
-                    message: "SUCCESS: Job '${JOB_NAME}''${BUILD_NUMBER}'"
-                )
-            }
-            failure {
-                slackSend (
-                    channel: '#devops',
-                    color: '#FFFF00',
-                    message: "FAIL: Job '${JOB_NAME}''${BUILD_NUMBER}'"
-                )
-            }
+    }
+    post {
+        success {
+            slackSend (
+                channel: "#devops",
+                color: '#FFFF00',
+                message: "SUCCESS: Job '${JOB_NAME}''${BUILD_NUMBER}'"
+            )
+        }
+        failure {
+            slackSend (
+                channel: '#devops',
+                color: '#FFFF00',
+                message: "FAIL: Job '${JOB_NAME}''${BUILD_NUMBER}'"
+            )
         }
     }
 }
