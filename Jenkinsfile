@@ -39,18 +39,18 @@ pipeline{
         }
         post {
             success {
-                slackSend {
-                    channel: '#devops',
+                slackSend (
+                    channel: "#devops",
                     color: '#FFFF00',
                     message: "SUCCESS: Job '${JOB_NAME}''${BUILD_NUMBER}'"
-                }
+                )
             }
             failure {
-                slackSend {
+                slackSend (
                     channel: '#devops',
                     color: '#FFFF00',
                     message: "FAIL: Job '${JOB_NAME}''${BUILD_NUMBER}'"
-                }
+                )
             }
         }
     }
