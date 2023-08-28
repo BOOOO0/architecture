@@ -7,6 +7,15 @@ pipeline{
                 checkout([$class: 'GitSCM', branches: [[name: 'deploy/server']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/BOOOO0/architecture.git']]])
             }
         }
+        stage("Start"){
+            steps {
+                slackSend (
+                    channel: '#devops',
+                    color: '#FFFF00',
+                    message: "STARTED: Job ${JOB_NAME}${BUILD_NUMBER}"
+                )
+            }
+        }
         stage("Build"){
             steps{
                 script{
@@ -28,4 +37,21 @@ ansible-playbook -i ./ansible/back_inventory.ini ./ansible/backend_playbook.yml 
             }
         }
     }
+    post {
+        success {
+            slackSend (
+                channel: "#devops",
+                color: '#FFFF00',
+                message: "SUCCESS: Job ${JOB_NAME}${BUILD_NUMBER}"
+            )
+        }
+        failure {
+            slackSend (
+                channel: '#devops',
+                color: '#FFFF00',
+                message: "FAIL: Job ${JOB_NAME}''${BUILD_NUMBER}"
+            )
+        }
+    }
+}
 }
