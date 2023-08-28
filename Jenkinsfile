@@ -10,8 +10,8 @@ pipeline{
         stage("Start"){
             steps {
                 slackSend (
-                    channel: "#devops",
-                    color: "#FFFF00",
+                    channel: '#devops',
+                    color: '#FFFF00',
                     message: "STARTED: Job ${JOB_NAME}${BUILD_NUMBER}"
                 )
             }
