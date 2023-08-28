@@ -4,7 +4,7 @@ pipeline{
         stage("Checkout Repo") {
             steps {
                 cleanWs()
-                checkout([$class: 'GitSCM', branches: [[name: '*/deploy/server']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/BOOOO0/architecture.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/server']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/BOOOO0/architecture.git']]])
             }
         }
         stage("Start"){
