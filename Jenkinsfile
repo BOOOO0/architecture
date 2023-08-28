@@ -12,7 +12,7 @@ pipeline{
                 slackSend (
                     channel: '#devops',
                     color: '#FFFF00',
-                    message: "STARTED: Job '${JOB_NAME}''${BUILD_NUMBER}'"
+                    message: "STARTED: Job ${JOB_NAME}${BUILD_NUMBER}"
                 )
             }
         }
@@ -43,14 +43,14 @@ pipeline{
             slackSend (
                 channel: "#devops",
                 color: '#FFFF00',
-                message: "SUCCESS: Job '${JOB_NAME}''${BUILD_NUMBER}'"
+                message: "SUCCESS: Job ${JOB_NAME}${BUILD_NUMBER}"
             )
         }
         failure {
             slackSend (
                 channel: '#devops',
                 color: '#FFFF00',
-                message: "FAIL: Job '${JOB_NAME}''${BUILD_NUMBER}'"
+                message: "FAIL: Job ${JOB_NAME}''${BUILD_NUMBER}"
             )
         }
     }
