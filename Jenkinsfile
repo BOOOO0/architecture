@@ -54,4 +54,3 @@ ansible-playbook -i ./ansible/back_inventory.ini ./ansible/backend_playbook.yml 
         }
     }
 }
-}
