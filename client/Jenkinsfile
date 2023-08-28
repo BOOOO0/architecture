@@ -7,7 +7,16 @@ pipeline{
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/BOOOO0/architecture.git']]])
             }
         }
-         stage("Build"){
+        stage("Start"){
+            steps {
+                slackSend (
+                    channel: '#devops',
+                    color: '#FFFF00',
+                    message: "STARTED: Job ${JOB_NAME}${BUILD_NUMBER}"
+                )
+            }
+        }
+        stage("Build"){
             steps{
                 nodejs('node16'){
                     sh 'npm install'
@@ -27,6 +36,22 @@ pipeline{
                     ansible-playbook -i ./ansible/front_inventory.ini ./ansible/frontend_playbook.yml --extra-vars "file_name='${JOB_NAME}${BUILD_NUMBER}.tar.gz'"
                 '''
             }
+        }
+    }
+    post {
+        success {
+            slackSend (
+                channel: "#devops",
+                color: '#FFFF00',
+                message: "SUCCESS: Job ${JOB_NAME}${BUILD_NUMBER}"
+            )
+        }
+        failure {
+            slackSend (
+                channel: '#devops',
+                color: '#FFFF00',
+                message: "FAIL: Job ${JOB_NAME}''${BUILD_NUMBER}"
+            )
         }
     }
 }

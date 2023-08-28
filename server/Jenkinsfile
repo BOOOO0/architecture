@@ -4,7 +4,16 @@ pipeline{
         stage("Checkout Repo") {
             steps {
                 cleanWs()
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/BOOOO0/architecture.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: 'deploy/server']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/BOOOO0/architecture.git']]])
+            }
+        }
+        stage("Start"){
+            steps {
+                slackSend (
+                    channel: '#devops',
+                    color: '#FFFF00',
+                    message: "STARTED: Job ${JOB_NAME}${BUILD_NUMBER}"
+                )
             }
         }
         stage("Build"){
@@ -26,6 +35,22 @@ pipeline{
 ansible-playbook -i ./ansible/back_inventory.ini ./ansible/backend_playbook.yml --extra-vars "file_name='${JOB_NAME}${BUILD_NUMBER}.jar'"
                    '''
             }
+        }
+    }
+    post {
+        success {
+            slackSend (
+                channel: "#devops",
+                color: '#FFFF00',
+                message: "SUCCESS: Job ${JOB_NAME}${BUILD_NUMBER}"
+            )
+        }
+        failure {
+            slackSend (
+                channel: '#devops',
+                color: '#FFFF00',
+                message: "FAIL: Job ${JOB_NAME}''${BUILD_NUMBER}"
+            )
         }
     }
 }
