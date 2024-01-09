@@ -1,4 +1,4 @@
-package best.server.server;
+package org.boo0.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

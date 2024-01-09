@@ -1,4 +1,4 @@
-package best.server.server;
+package org.boo0.server;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
