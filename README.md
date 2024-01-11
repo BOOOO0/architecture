@@ -13,7 +13,7 @@
 - Spring Boot v3.1.7
 - JPA
 - Lombok
-- Java v17
+- Java v17.0.7
 - MariaDB v10.11.6
 
 <details><summary>v1.0~v1.1</summary>
