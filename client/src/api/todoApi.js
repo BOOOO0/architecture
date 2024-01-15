@@ -5,7 +5,7 @@ import axios from "axios";
 
 export const API_SERVER_HOST = 'http://localhost:8080'
 
-const prefix = `${API_SERVER_HOST/api/todo}`
+const prefix = `${API_SERVER_HOST}/api/todo`
 
 export const getOne = async (tno) => {
     const res = await axios.get(`${prefix}/${tno}`)
@@ -17,7 +17,15 @@ export const getList = async (pageParam) => {
 
     // {params : {...pageParam}도 가능하다.
     // 일단 이건 리스트를 불러올때 파라미터들을 유지하기 위해서 같이 불러온다.
-    const res = await axios.get(`${prefix}/list`, {params:{page, size}})
+    const res = await axios.get(`${prefix}/list`, {params: {page, size}})
 
     return res.data
+}
+
+export const postAdd = async (todoObj) => {
+    // 이제는 JSON.stringify 없이 axios를 쓰면 객체를 넘기면 그대로 JSON으로 넘어간다.
+    const res = await axios.post(`${prefix}/`, todoObj)
+
+    return res.data
+    
 }
