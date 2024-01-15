@@ -42,7 +42,7 @@ public class TodoRepositoryTests {
 
     @Test
     public void testRead(){
-        Long tno = 1L;
+        Long tno = 2L;
         
 //        Id에 해당하는 값이 없을 수도 있으니까
         Optional<Todo> result = todoRepository.findById(tno);
@@ -57,7 +57,7 @@ public class TodoRepositoryTests {
         // 일단 레코드를 읽어온다. 그럼 그 레코드는 여기서는 객체 그럼 그 객체 변경하고 저장
 //        JPA가 추구하는게 이런거라고 하네
 //
-        Long tno = 1L;
+        Long tno = 2L;
 
 //        Id에 해당하는 값이 없을 수도 있으니까
         Optional<Todo> result = todoRepository.findById(tno);
