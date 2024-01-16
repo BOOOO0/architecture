@@ -435,5 +435,7 @@
 
 - 동작이 모두 확인되면 그때 CI/CD 파이프라인을 구축한다. 개선이 필요한 부분이 있으면 개선한다. Jenkins + Ansible을 그대로 사용할 것이다.
 
+- ALB의 HealthCheck는 Get 요청으로 오는데 그 Get 요청에 200을 보낼 API를 추가로 개발해야 한다.
+
 <div>
 </details>
