@@ -45,3 +45,7 @@ variable "t3_micro" {
 variable "ec2_key" {
   default = "EC2_Key"
 }
+
+variable "t3_medium" {
+  default = "t3.medium"
+}
