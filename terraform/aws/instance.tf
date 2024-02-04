@@ -61,7 +61,7 @@ resource "aws_instance" "was_1" {
 
   vpc_security_group_ids = [ aws_security_group.was_sg.id ]
   
-  user_data = file("./script/ws.sh")
+  user_data = file("./script/was.sh")
 
   tags = {
     Name = "was-1"

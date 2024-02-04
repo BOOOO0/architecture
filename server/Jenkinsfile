@@ -19,7 +19,7 @@ pipeline{
         stage("Build"){
             steps{
                 script{
-                    dir('server/server'){
+                    dir('server'){
                         sh 'chmod 777 gradlew'
                         sh './gradlew build'
                     }
@@ -27,7 +27,7 @@ pipeline{
             }
             post{
                 success{
-                    sh '/usr/local/bin/aws --endpoint-url=https://kr.object.ncloudstorage.com s3 cp ./server/server/build/libs/server-0.0.1-SNAPSHOT.jar s3://itwassummer0815/${JOB_NAME}${BUILD_NUMBER}.jar'
+                    sh 'aws s3 cp ./server/build/libs/server-0.0.1-SNAPSHOT.jar s3://itwaswinter0204/${JOB_NAME}${BUILD_NUMBER}.jar'
                 }
             }
         }

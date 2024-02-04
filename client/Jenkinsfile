@@ -18,23 +18,23 @@ pipeline{
         }
         stage("Build"){
             steps{
-                nodejs('node16'){
+                nodejs('node18'){
                     sh 'npm install --prefix ./client'
                     sh 'npm run build --prefix ./client'
-                    sh 'tar -zcf ${JOB_NAME}${BUILD_NUMBER}.tar.gz ./client/dist/*'
+                    sh 'tar -zcf ${JOB_NAME}${BUILD_NUMBER}.tar.gz ./client/build/*'
                 }
             }
             post{
                 success{
-                    sh '/usr/local/bin/aws --endpoint-url=https://kr.object.ncloudstorage.com s3 cp ./${JOB_NAME}${BUILD_NUMBER}.tar.gz s3://itwassummer0815/${JOB_NAME}${BUILD_NUMBER}.tar.gz'
+                    sh 'aws s3 cp ./${JOB_NAME}${BUILD_NUMBER}.tar.gz s3://itwaswinter0204/${JOB_NAME}${BUILD_NUMBER}.tar.gz'
                 }
             }
         }
         stage("Deploy"){
             steps{
                 sh '''
-                    ansible-playbook -i ./client/ansible/front_inventory.ini ./client/ansible/frontend_playbook.yml --extra-vars "file_name='${JOB_NAME}${BUILD_NUMBER}.tar.gz'"
-                '''
+ansible-playbook -i ./client/ansible/front_inventory.ini ./client/ansible/frontend_playbook.yml --extra-vars "file_name='${JOB_NAME}${BUILD_NUMBER}.tar.gz'"
+                   '''
             }
         }
     }
