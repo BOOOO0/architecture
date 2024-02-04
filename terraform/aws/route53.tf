@@ -45,14 +45,22 @@ resource "aws_route53_record" "entry_point" {
   }
 }
 
-resource "aws_route53_record" "request_domain"{
-  zone_id = aws_route53_zone.boooo0_shop.zone_id
-  name = "request"
-  type = "A"
+# resource "aws_route53_record" "request_domain"{
+#   zone_id = aws_route53_zone.boooo0_shop.zone_id
+#   name = "request"
+#   type = "A"
 
-  alias {
-    name = aws_lb.my_lb_2.dns_name
-    zone_id = aws_lb.my_lb_2.zone_id
-    evaluate_target_health = true
-  }
-}
+#   alias {
+#     name = aws_lb.my_lb_2.dns_name
+#     zone_id = aws_lb.my_lb_2.zone_id
+#     evaluate_target_health = true
+#   }
+# }
+
+# resource "aws_route53_record" "db_domain" {
+#   zone_id = aws_route53_zone.boooo0_shop.zone_id
+#   name = "db"
+#   type = "CNAME"
+#   ttl = 300
+#   records = [ aws_db_instance.my_db.address ]
+# }

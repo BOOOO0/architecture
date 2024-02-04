@@ -13,9 +13,9 @@ resource "aws_lb" "my_lb_1" {
 resource "aws_lb_listener" "my_lb_1_listner" {
   load_balancer_arn = aws_lb.my_lb_1.arn
 
-  port = 443
-  protocol = "HTTPS"
-  certificate_arn = aws_acm_certificate.cert.arn
+  port = 80
+  protocol = "HTTP"
+  # certificate_arn = aws_acm_certificate.cert.arn
 
   default_action {
     target_group_arn = aws_lb_target_group.my_lb_1_tg.arn
@@ -30,12 +30,6 @@ resource "aws_lb_target_group" "my_lb_1_tg" {
 
   vpc_id = aws_vpc.my_vpc.id
 
-  health_check {
-    path = "/health"
-    healthy_threshold = 2
-    unhealthy_threshold = 2
-    interval = 30
-  }
 }
 
 # 인스턴스에 attach하는 것

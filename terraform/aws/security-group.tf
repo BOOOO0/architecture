@@ -31,6 +31,13 @@ resource "aws_security_group" "lb_sg_1" {
   vpc_id = aws_vpc.my_vpc.id
 
   ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
@@ -131,7 +138,7 @@ resource "aws_security_group" "was_sg" {
 
 resource "aws_security_group" "db_sg" {
   vpc_id = aws_vpc.my_vpc.id
-  
+
   ingress {
     from_port   = 3306
     to_port     = 3306
