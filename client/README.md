@@ -1,8 +1,129 @@
-# React + Vite
+# React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- vite의 사용도 좋고 npx create-react-app도 좋다.
 
-Currently, two official plugins are available:
+- webStorm의 경우엔 IDE에서 프로젝트 생성 자체를 위 두가지 모두 제공하고 리액트 프로젝트 생성은 더 간단해졌다.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- `npm install tailwindcss`, `npx tailwindcss init`
+
+- index.css에 tailwind 어노테이션 명시
+
+- 개인 프로젝트이기 때문에 tailwind를 사용하는 것으로
+
+- URI 분기를 React-Router를 사용해서 한다.
+
+- createBrowserRouter는 각 경로(path)와 페이지(element)의 값을 가진 객체의 배열을 가진다.
+
+- 그 배열의 내용이 라우팅을 결정한다.
+
+- code splitting은 페이지가 필요해질 때 까지 로딩하지 않는 것
+
+- React는 code splitting을 lazy와 Suspense를 통해 지원한다.
+
+- lazy는 동적 import를 가능하게 해준다.
+
+- 웹앱이 실행되었을때 초기 렌더링을 위해 처리해야 할 것이 너무 많다면 속도가 느려질 수 있는데 렌더링을 동적으로 필요할 때 처리하면 속도를 향상 시킬 수 있다는 것이다.
+
+- 예를 들어 페이지가 /main, /about, /post 이렇게 세 가지 페이지로 이루어진 SPA를 개발한다고 할 때 /main으로 들어가는 동안 /about, /post는 필요하지 않을 가능성이 높기 때문에 더 나은 사용자 경험을 위해 렌더링하지 않을 수 있도록 하는 것
+
+- `const Main = lazy(() => import("../pages/MainPage"));`
+
+- 리액트 라우터로 분기가 나눠진 컴포넌트들을 lazy로 import하면 불러오는 시간이 생긴다.
+
+- React.Suspense는 렌더링이 되기 전까지 로딩 화면을 보여주고 임포트가 끝나면 준비된 컴포넌트를 보여주는 기능이다.
+
+- `<Suspense fallback={Loading}>
+    <Main />
+  </Suspense>`
+
+- 브라우저 라우터에서 위와 같이 페이지 경로를 구성하면 브라우저 창이 전체가 새로고침 되어 새로 렌더링 되는데 리액트 앱이 매번 새로 실행되는 것과 같다.
+
+- 이부분을 Link를 통해 다른 경로로 이동하도록 하면 main에서 about으로 링크를 타고 가고 뒤로가기로 main을 가더라도 uri를 입력했을 때 처럼 로딩이 새로 되지 않고 페이지를 이동한다.
+
+- 컴포넌트 하나 하나의 렌더링에 대한 얘기가 아니고 라우팅해서 경로가 바뀌는 경우 페이지를 렌더링할 때의 이야기인 것 같다.
+
+---
+
+- 페이지의 구조를 잡기 위한 공통 레이아웃을 생성하기 위해 children 사용
+
+- children은 배열로 들어와서 인덱스로 지정할 수 있다.
+
+- children은 기본 제공 props 같은데 컴포넌트 사이에 담기는 jsx 내용을 렌더링할 수 있는 것으로 보임
+
+---
+
+- 2depth는 일반적인 위 Navbar 기본으로 있고 그 선택에 따라 하위 화면이 변하는 것을 의미
+
+- 계속 계층적인 구조를 얘기하는 것 같은데 상단 메뉴바가 있고 Todo 페이지를 메뉴바 아래 다른 depth에 불러오는데 그 Todo에서도 LIST, ADD 메뉴가 존재하고 이 메뉴들도 Todo라는 페이지의 하위 컴포넌트들이고 그 부분만 변경되도록 하는데에 Outlet을 쓴다는 의미인 것 같다.
+
+- 리액트 라우터에서 bracket을 하나 열고 경로를 지정해주고 element로 부를 페이지를 명시하고 그 다음 children이라는 키를 하나 또 열어서 똑같이 path, element를 명시해주는데 이렇게 하면 그 하위 경로가 된다.
+
+- 도메인.com/todo/list/ 이런 식으로 되는 것
+
+- 위에 끝에 `/`를 붙였는데 뒤에 API를 호출하기 위해 파라미터가 붙거나 할때 이렇게 한다. 이렇게 하려면 Link가 되는 곳에서 `list/`로 라우팅되도록 해야 한다. 그러고 나면 라우터에서 경로 명시는 `/`를 붙이지 않아도 된다. 이렇게 하는게 단 하나의 방법인지는 모르지만 일단 그렇게 한다.
+
+- `<Outlet/>`의 의미는 아마 라우팅 상에서 하위 경로로 호출되는 컴포넌트를 이 자리에 부르겠다는 방식으로 쓰는 것 같다.
+
+- 라우터의 분리
+
+- 라우터를 분리했으면 상위 라우터의 분기점이 되는 경로 부분에 children으로 하위 라우터 함수의 실행값을 전달한다.
+
+- 리다이렉션
+
+- 리다이렉션을 하려면 똑같이 라우터에 경로 값을 주는데 path에 리다이렉션이 일어날 경로를 적고 element에 Suspense가 아닌 Navigate를 주고 to 속성에 리다리엑션 되어 보내질 경로를 적는다.
+
+- useParams
+
+- URI로 들어오는 값을 파라미터로 읽어올 수 있는 리액트 훅이다.
+
+- `도메인.com/read/123`이라면 123을 읽어온다. 이미 부여된 정적인 id값을 읽어올 때 사용하는 것 같다.
+
+- useSearchParams
+
+- 실제 쿼리 파라미터를 읽어오는 리액트 라우터 기능이다.
+
+- 사용은 useState처럼 배열에 getter와 setter를 선언한다.
+
+- `const [getter, setter] = useSearchParams();`
+
+- 값의 호출은 `getter.get("파라미터명")`으로 한다.
+
+- 값의 할당은 `getter.set("파라미터명", "값")`으로 설정한 다음 `setter(getter)`를 해준다.
+
+- useNavigate
+
+- 위 상황에 직접 파라미터를 입력해서 테스트해보면 새로고침이 되는데 useNavigate를 사용해서 위에 Link 처럼 버튼을 통해 이동하도록 한다?
+
+- 아무튼 위 내용은 모두 id 값에 맞는 항목을 조회, 수정, 삭제하기 위해 URI에서 값을 불러오거나 그 값에 맞게 호출하는 훅이다.
+
+- 예시를 보려면 쿠팡같은 사이트에서노트북 카테고리를 선택하고 페이지를 이동하면 `/categories/[카테고리 번호]/?page=[페이지 번호]`
+  이렇게 나온다.
+
+- 지금 Todolist에서 `todo/read/글id/` 이런거나 `todo/modify/글id` 이런것들이 위 내용 구현이고 위에 이해한 내용이다.
+
+- 상품을 클릭하더라도 클릭할 때 페이지 번호를 URI에서 유지하는 경우를 예시로 드는데 이런걸 구현하기 위함?
+
+- read에서 페이지 번호가 파라미터로 주어진 상태인데 modify 버튼 눌러도 그 파라미터가 유지되도록 구현했다.
+
+- 이유는 웹앱도 웹이므로 URL을 기준으로 동작해야 하며 링크가 공유되고 그럴 수 있는데 그때 정보를 유지한 상태로 전달되어야 하기 때문이다.
+
+- useEffect - 함수형 컴포넌트가 데이터를 유지하기 위해 사용
+
+- useEffect는 뒤에 의존성이 변경되면 다시 호출하는데 이걸 tno(id) 값을 주면 Read 컴포넌트가 그에 맞게 데이터를 새로 호출할 수 있다.
+
+- 304에러 - Read 컴포넌트 테스트 중 불러올 API가 없는 상태에서 브라우저가 최초 호출한 경우 상태코드 200을 받지만 일정 시간이 지난 후에도 데이터가 호출되어 변하지 않으면 304 not modified가 나온다.
+
+- Navigation 관련 커스텀 훅 - 페이지 이동, 컴포넌트 이동 모두 Naviagate와 관련된 기능이 많이 필요하다. 그때그때 구현하는 것보다 커스텀 훅을 구현해 활용한다.
+
+- 클라이언트에서 경로 라우팅할때 상대경로로 `../갈 페이지` 이렇게 가능하구만
+
+- 동일 페이지 클릭 처리 - useEffect에서 페이지가 안변하면 그대로 두니까 일부러 변하는 값을 하나 둔다. refresh라는 boolean 변수를 하나 만들어서 toggle 되도록 만든다.
+
+- Alert 경고창을 사용하지 않는 이유는 자바스크립트는 싱글 스레드인데 Alert를 쓰면 App 자체가 완전히 멈추는 것과 같기 때문이다.
+
+- PRG - Post - Redirect - Get 서버에 Post 보내고 응답 헤더에 Location을 담아 보내면 클라이언트는 다시 그 경로로 Get을 보낸다.
+
+- 서버에 Post 요청을 보내고 그 결과를 Modal창을 통해 보여주고 그 모달창을 통해 다음으로 넘어갈 수 있도록 한다.
+
+- 나중에 데이터를 많이 가져와서 오래걸릴때 로딩 모달창을 구현할 것
+
