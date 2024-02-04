@@ -131,7 +131,7 @@ resource "aws_security_group" "was_sg" {
 
 resource "aws_security_group" "db_sg" {
   vpc_id = aws_vpc.my_vpc.id
-
+  
   ingress {
     from_port   = 3306
     to_port     = 3306
@@ -147,6 +147,6 @@ resource "aws_security_group" "db_sg" {
   }
 
   tags = {
-    Name = "was-sg"
+    Name = "db-sg"
   }
 }

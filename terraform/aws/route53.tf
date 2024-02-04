@@ -56,11 +56,3 @@ resource "aws_route53_record" "request_domain"{
     evaluate_target_health = true
   }
 }
-
-resource "aws_route53_record" "db_domain" {
-  zone_id = aws_route53_zone.boooo0_shop.zone_id
-  name = "db"
-  type = "CNAME"
-  ttl = 300
-  records = [ aws_db_instance.my_db.address ]
-}
