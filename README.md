@@ -2,26 +2,12 @@
 
 - Terraform을 사용해서 VPC 환경에서의 클라우드 인프라를 프로비저닝하고 Jenkins와 Ansible로 서로 데이터를 주고 받는 React앱과 Spring Boot앱의 CI/CD 파이프라인을 구축합니다.
 
-<<<<<<< HEAD
-- ![image](./img/architecture.PNG)
-
-=======
->>>>>>> develop
 ## 사용 기술
 
 - Terraform v1.4.4
 - Jenkins v2.401.3
 - Ansible v2.9.27
 - React v18.2.15
-<<<<<<< HEAD
-- Vite v4.4.5
-- Node.js 16
-- Spring Boot v3.1.2
-- JPA
-- Lombok
-- Java 17
-- MySQL v8.0.21
-=======
 - Node.js v18.16.0
 - tailwind v3.4.1
 - Spring Boot v3.1.7
@@ -35,7 +21,6 @@
 <div markdown="1">
 
 - ![image](./img/architecture.PNG)
->>>>>>> develop
 
 ## Infrastructure
 
@@ -417,8 +402,6 @@
 
 <div>
 </details>
-<<<<<<< HEAD
-=======
 
 <div>
 </details>
@@ -474,6 +457,23 @@
 
 - 이후에 ACM 적용까지 끝나면 DNS 레코드로 엔트리 포인트 LB를 Terraform으로 등록해보자.
 
+- dnf로 바로 자바 17이 설치가 가능한 것 같으니 그걸로 변경해보자 다시
+
+- 대 난 관
+
+- HTTPS로 접속하면 Client -> Server도 HTTPS여야 한다.
+
+- HTTP로 다시 변경하기 OR HTTPS가 가능하도록 추가 설정
+
+- 일단 HTTP로 변경하고 요청이 잘 가는지 전체 동작이 원활한지 확인이 우선이니까 이걸 최우선으로 한다.
+
+- 요청이 전달이 되지 않는데 클라이언트쪽에서 Ajax같은 추가적인 구현이 필요한 것인지 내부 LB가 전달을 하지 못하는 것인지는 모르겠다.
+
+- 우선 오늘의 수확은 HTTPS로 사용자가 엔트리 포인트로 접속했다면 내부에서의 모든 요청도 HTTPS로 이루어져야 한다.
+
+- 백엔드 서버는 테스트, 빌드, 실행 모두 정상적으로 동작한다.
+
+- asdvxzcvzxcvxzcv
+
 <div>
 </details>
->>>>>>> develop
