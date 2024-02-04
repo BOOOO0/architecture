@@ -406,12 +406,18 @@
 <div>
 </details>
 
+---
+
+---
+
 <details><summary>v2.0</summary>
 <div markdown="1">
 
 - 이중화된 3-tier 아키텍처를 구축하고 페이징 기능을 포함한 Todolist를 구현해서 배포합니다.
 
 -![image](./img/v2.0.PNG)
+
+- https://drive.google.com/file/d/1tlePiltuHqziY6WkdoCfRequo4WX3fUE/view?usp=sharing
 
 # Infrastructure
 
@@ -425,7 +431,11 @@
 
 - Jenkins, WS, WAS 인스턴스의 초기 구축을 모두 스크립트를 통한 EC2 user data로 자동화합니다.
 
--
+- WS부터 DB까지 모두 Private Subnet에 구축하고 WS와 WAS는 NAT Gateway를 통해 패키지 설치 등을 진행합니다. Jenkins 서버는 편의를 위해 바스티온 호스트의 역할을 겸하며 다른 Private 서버에 SSH가 가능하도록 했습니다.
+
+# Frontend
+
+- React 라이브러리를 사용하고 React Router Dom을 사용합니다.
 
 <details><summary>이전 버전의 문제점과 해결 과정</summary>
 <div markdown="1">
@@ -480,11 +490,7 @@
 
 - dnf로 바로 자바 17이 설치가 가능한 것 같으니 그걸로 변경해보자 다시
 
-<<<<<<< HEAD
 # 새로 마주한 문제
-=======
-- 대 난 관
->>>>>>> develop
 
 - HTTPS로 접속하면 Client -> Server도 HTTPS여야 한다.
 
@@ -492,7 +498,6 @@
 
 - 일단 HTTP로 변경하고 요청이 잘 가는지 전체 동작이 원활한지 확인이 우선이니까 이걸 최우선으로 한다.
 
-<<<<<<< HEAD
 - 요청이 전달이 되지 않는데 클라이언트쪽에서 추가적인 구현이 필요한 것인지 내부 LB가 전달을 하지 못하는 것인지는 모르겠다.
 
 - 우선 오늘의 수확은 HTTPS로 사용자가 엔트리 포인트로 접속했다면 내부에서의 모든 요청도 HTTPS로 이루어져야 한다.
@@ -505,20 +510,18 @@
 
 - 그리고 서버에 SSH를 하는 것을 최대한 피하는 그러니까 구축과 구현 단계에서 서버 자체에 접속해서 해결하기보다 매번 동일한 결과를 낼 수 있도록 자동화해서 빠르게 요구에 대응할 수 있도록 하려고 했으나 꼭 반드시 그래야 할 문제는 아닌 것 같다.
 
-- 인스턴스 내부에서 문제를 해결하는 경우는 항상 있기 때문에 지금만큼의 자동화도 나쁘지않은 것 같다.
+- 인스턴스 내부에서 문제를 해결하는 경우는 항상 있기 때문에 지금만큼의 자동화도 나쁘지 않은 것 같다.
 
 </div>
 </details>
 
 # 되돌아보며
 
-<details><summary>이전 버전의 문제점과 해결 과정</summary>
+<details><summary></summary>
 <div markdown="1">
 
 </div>
 </details>
 
-=======
->>>>>>> develop
 <div>
 </details>
