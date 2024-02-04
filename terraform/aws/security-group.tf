@@ -114,7 +114,7 @@ resource "aws_security_group" "was_sg" {
     from_port   = 8080
     to_port     = 8080
     protocol    = "tcp"
-    security_groups = [ aws_security_group.ws_sg.id ]
+    security_groups = [ aws_security_group.ws_sg.id, aws_security_group.lb_sg_2.id ]
   }
 
   ingress {
