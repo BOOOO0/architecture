@@ -4,9 +4,8 @@
   tasks:
     - name: "Download Artifact"
       shell:
-        cmd: '/usr/local/bin/aws --endpoint-url=https://kr.object.ncloudstorage.com s3 cp s3://itwassummer0815/{{ filename }} /root/artifact/server.jar'
+        cmd: "aws s3 cp s3://itwaswinter0204/{{ filename }} /home/ec2_user/server.jar"
 
     - name: "Deploy"
       shell:
-        cmd: 'sh /root/pid/replaceserver.sh'
-
+        cmd: "sh /home/ec2-user/replaceserver.sh"

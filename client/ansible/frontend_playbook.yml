@@ -4,7 +4,7 @@
   tasks:
     - name: "Download Artifact"
       shell:
-        cmd: "/usr/local/bin/aws --endpoint-url=https://kr.object.ncloudstorage.com s3 cp s3://itwassummer0815/{{ filename }} /usr/share/nginx/build.tar.gz"
+        cmd: "aws s3 cp s3://itwaswinter0204/{{ filename }} /usr/share/nginx/build.tar.gz"
 
     - name: "Wait for Artifact"
       wait_for:
