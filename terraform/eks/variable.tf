@@ -6,8 +6,8 @@ variable "amazon_linux_2023_ami" {
   default = "ami-0bfd23bc25c60d5a1"
 }
 
-variable "amazon_2023_tokyo" {
-  default = "ami-039e8f15ccb15368a"
+variable "amazon_2023" {
+  default = "ami-0ac9b8202b45eeb08"
 }
 
 variable "t3_micro" {
@@ -15,7 +15,7 @@ variable "t3_micro" {
 }
 
 variable "ec2_key" {
-  default = "my_key"
+  default = "ver3_key"
 }
 
 variable "t3_medium" {

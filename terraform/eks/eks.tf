@@ -31,26 +31,12 @@ resource "aws_eks_node_group" "node_group" {
   ]
 }
 
-resource "aws_eks_fargate_profile" "fargate_profile" {
-  cluster_name           = aws_eks_cluster.eks-cluster.name
-  fargate_profile_name   = "frontend"
-  pod_execution_role_arn = aws_iam_role.fargate.arn
-  subnet_ids             = module.vpc.private_subnets
-
-  selector {
-    namespace = "dev"
-    labels = {
-      env : "frontend"
-    }
-  }
-}
-
-resource "aws_eks_addon" "ebs-csi" {
-  cluster_name             = aws_eks_cluster.eks-cluster.name
-  addon_name               = "aws-ebs-csi-driver"
-  addon_version            = "v1.28.0-eksbuild.1"
-  service_account_role_arn = module.irsa-ebs-csi.iam_role_arn
-}
+# resource "aws_eks_addon" "ebs-csi" {
+#   cluster_name             = aws_eks_cluster.eks-cluster.name
+#   addon_name               = "aws-ebs-csi-driver"
+#   addon_version            = "v1.28.0-eksbuild.1"
+#   service_account_role_arn = module.irsa-ebs-csi.iam_role_arn
+# }
 
 module "irsa-ebs-csi" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc"

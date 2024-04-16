@@ -1,7 +1,7 @@
 resource "aws_instance" "master_node" {
   subnet_id = module.vpc.public_subnets[1]
 
-  ami = var.amazon_2023_tokyo
+  ami = var.amazon_2023
   instance_type = var.t3_medium
   key_name = var.ec2_key
 
