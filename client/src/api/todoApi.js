@@ -3,8 +3,7 @@
 // 이후 클라우드에 배포할 때가 되면 아래 API_SERVER_HOST 상수만 변경하면 된다.
 import axios from "axios";
 
-export const API_SERVER_HOST =
-  "http://my-lb-2-547100794.ap-northeast-2.elb.amazonaws.com";
+export const API_SERVER_HOST = "backend";
 
 const prefix = `${API_SERVER_HOST}/api/todo`;
 
