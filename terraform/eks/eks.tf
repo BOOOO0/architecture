@@ -31,12 +31,12 @@ resource "aws_eks_node_group" "node_group" {
   ]
 }
 
-resource "aws_eks_addon" "ebs-csi" {
-  cluster_name             = aws_eks_cluster.eks-cluster.name
-  addon_name               = "aws-ebs-csi-driver"
-  addon_version            = "v1.28.0-eksbuild.1"
-  service_account_role_arn = module.irsa-ebs-csi.iam_role_arn
-}
+# resource "aws_eks_addon" "ebs-csi" {
+#   cluster_name             = aws_eks_cluster.eks-cluster.name
+#   addon_name               = "aws-ebs-csi-driver"
+#   addon_version            = "v1.28.0-eksbuild.1"
+#   service_account_role_arn = module.irsa-ebs-csi.iam_role_arn
+# }
 
 module "irsa-ebs-csi" {
   source  = "terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc"
