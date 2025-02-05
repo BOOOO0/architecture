@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://host.docker.internal:3306/apidb  # Docker 빌드 시에도 로컬 DB 연결 가능
+    username: root
+    password: qndud123
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+
+logging:
+  level:
+    com.zaxxer: info
